@@ -21,8 +21,7 @@ EcoTrack 🌱
 ## Technologies Used
 
 - *Frontend:* HTML, CSS, JavaScript  
-- *Backend:* Node.js, Express.js  
-- *Database:* (Add your database if used, e.g., MongoDB)  
+- *Backend:* Node.js, Express.js   
 - *APIs:* OpenAI API for chatbot functionality  
 - *Visualization:* Chart.js for interactive charts
 
