@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoAI - Chat Assistant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="app-page">
+  <div class="topbar">
+    <h2>🌿 EcoTrack AI Assistant</h2>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="tracker.html">Tracker</a>
+      <a href="chat.html" class="active">EcoAI</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+
+  <div class="chat-container">
+    <div id="chat-box"></div>
+    <div class="chat-input">
+      <input type="text" id="user-input" placeholder="Ask EcoAI anything about sustainability..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+  async function sendMessage() {
+    const input = document.getElementById('user-input');
+    const chatBox = document.getElementById('chat-box');
+    const userText = input.value.trim();
+    if (!userText) return;
+
+    // Display user message
+    const userMsg = document.createElement('div');
+    userMsg.className = 'msg user';
+    userMsg.textContent = userText;
+    chatBox.appendChild(userMsg);
+    input.value = '';
+
+    // Send to backend AI
+    const res = await fetch('http://localhost:3000/askEcoAI', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: userText })
+    });
+    const data = await res.json();
+
+    // Display AI reply
+    const aiMsg = document.createElement('div');
+    aiMsg.className = 'msg ai';
+    aiMsg.textContent = data.answer;
+    chatBox.appendChild(aiMsg);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    
+  }
+  </script>
+</body>
+</html>
